@@ -18,7 +18,10 @@ export class ValueComponent implements OnInit {
   values:Value[]=[];
   
   ngOnInit(){
-    this.getValues()
+    alert("başladı")
+    this.getValues().subscribe(data=>{
+      this.values = data
+    })
     
   }
 
