@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Value } from '../models/value';
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';  // HttpClientModule'ü import edin
 
 @Component({
   selector: 'app-value',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, HttpClientModule],  // HttpClientModule'ü buraya ekleyin
   templateUrl: './value.component.html',
-  styleUrl: './value.component.css'
+  styleUrls: ['./value.component.css']
 })
+
 export class ValueComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient){
+  values: Value[] = [];
 
-  } 
-  values:Value[]=[];
-  
-  ngOnInit(){
-    alert("başladı")
-    this.getValues().subscribe(data=>{
-      this.values = data
-    })
-    
+  constructor(private httpClient: HttpClient) {}
+
+  ngOnInit() {
+    this.getValues().subscribe(data => {
+      this.values = data;
+    }, error => {
+      console.error('Error fetching values:', error);
+    });
   }
 
-   getValues(){
-    return this.httpClient.get<Value[]>("https://localhost:7048/api/Values")
+  getValues() {
+    return this.httpClient.get<Value[]>("https://localhost:7048/api/Values");
   }
 }
