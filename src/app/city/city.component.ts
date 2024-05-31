@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { City } from '../models/city';
 
 @Component({
   selector: 'app-city',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './city.component.html',
   styleUrl: './city.component.css'
 })
-export class CityComponent {
+export class CityComponent implements OnInit {
+  constructor(){
+
+  }
+  cities:City[]
+  ngOnInit() {
+      
+  }
 
 }
